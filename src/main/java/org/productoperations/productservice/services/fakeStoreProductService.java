@@ -60,9 +60,20 @@ public class fakeStoreProductService implements Productservice {
         return fakeStoreProductDto.toProduct();
     }
 
+    /*
+    * this is dummy endpoint. it does nothing
+    * */
     @Override
-    public void createProduct(CreateProductDto createProductDto) {
+    public product createProduct(CreateProductDto createProductDto) {
+        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+        fakeStoreProductDto.setTitle(createProductDto.getTitle());
+        fakeStoreProductDto.setDescription(createProductDto.getDescription());
+        fakeStoreProductDto.setPrice(createProductDto.getPrice());
+        fakeStoreProductDto.setCategory(createProductDto.getCategory());
+        fakeStoreProductDto.setImage(createProductDto.getImage());
 
+        FakeStoreProductDto fakeStoreProductDto1 = restTemplate.postForObject("https://fakestoreapi.com/products", fakeStoreProductDto, FakeStoreProductDto.class);
+        return fakeStoreProductDto1.toProduct();
     }
 }
 

@@ -11,5 +11,5 @@ public interface Productservice {
 
     public product getSingleProduct(long id);
 
-    public void createProduct(CreateProductDto createProductDto);
+    public product createProduct(CreateProductDto createProductDto);
 }

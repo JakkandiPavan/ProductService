@@ -3,10 +3,7 @@ package org.productoperations.productservice.controllers;
 import org.productoperations.productservice.dtos.CreateProductDto;
 import org.productoperations.productservice.models.product;
 import org.productoperations.productservice.services.Productservice;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,9 +60,10 @@ public class ProductController {
     * .
     * }
     * */
+    //we are changing return type from void to product just for testing
     @PostMapping("/products")
-    public void createProduct(CreateProductDto createProductDto)
+    public product createProduct(@RequestBody CreateProductDto createProductDto)
     {
-        productservice.createProduct(createProductDto);
+        return productservice.createProduct(createProductDto);
     }
 }
