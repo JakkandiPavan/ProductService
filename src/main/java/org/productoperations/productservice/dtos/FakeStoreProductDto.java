@@ -22,6 +22,8 @@ public class FakeStoreProductDto {
         return p1;
     }
 
+
+
     public String getTitle() {
         return this.title;
     }

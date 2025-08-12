@@ -8,14 +8,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class ProductController {
 
 
     //dependency injection
-    private Productservice productservice;
+    private Productservice productservice;//interface and dependency injection(DI)
     public ProductController(Productservice productservice) {
         this.productservice = productservice;
     }
@@ -30,7 +33,9 @@ public class ProductController {
     * */
     @GetMapping("/products")
     public List<product> getAllProducts() {
+
         return productservice.getAllProducts();
+        //return productservice.getAllProducts(List<Long> ids);
     }
 
     /*
