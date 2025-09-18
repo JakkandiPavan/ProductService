@@ -1,32 +1,36 @@
 package org.productoperations.productservice.models;
 
-public class Category {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 
-    private long id;
+import java.util.List;
+
+@Entity //entity is JPA annotation - will tell that create tables when I run this
+public class Category extends BaseModel {
+
     private String title;
 
-    public Category(long id, String title) {
-        this.id = id;
-        this.title = title;
-    }
-
-    public Category() {
-    }
-
-    public long getId() {
-        return this.id;
-    }
+    @OneToMany (fetch = FetchType.EAGER, mappedBy = "category", cascade = {CascadeType.REMOVE})
+    @JsonIgnore
+    private List<product> products;//electronics
 
     public String getTitle() {
-        return this.title;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<product> products) {
+        this.products = products;
     }
 }
 

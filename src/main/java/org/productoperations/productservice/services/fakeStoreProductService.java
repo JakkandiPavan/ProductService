@@ -1,15 +1,14 @@
 package org.productoperations.productservice.services;
 
-import org.productoperations.productservice.dtos.CreateProductDto;
 import org.productoperations.productservice.dtos.FakeStoreProductDto;
 import org.productoperations.productservice.models.product;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-@Service
+
+@Service("fakeStoreProductService")
 public class fakeStoreProductService implements Productservice {
 
     //is to call FakeStoreAPI.com(internet) from the method
@@ -63,17 +62,22 @@ public class fakeStoreProductService implements Productservice {
     /*
     * this is dummy endpoint. it does nothing
     * */
-    @Override
-    public product createProduct(CreateProductDto createProductDto) {
-        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
-        fakeStoreProductDto.setTitle(createProductDto.getTitle());
-        fakeStoreProductDto.setDescription(createProductDto.getDescription());
-        fakeStoreProductDto.setPrice(createProductDto.getPrice());
-        fakeStoreProductDto.setCategory(createProductDto.getCategory());
-        fakeStoreProductDto.setImage(createProductDto.getImage());
 
-        FakeStoreProductDto fakeStoreProductDto1 = restTemplate.postForObject("https://fakestoreapi.com/products", fakeStoreProductDto, FakeStoreProductDto.class);
-        return fakeStoreProductDto1.toProduct();
+    @Override
+    public product createProduct(String title, String description, String Category, double price, String image) {
+        return null;
     }
+    //    @Override
+//    public product createProduct(CreateProductDto createProductDto) {
+//        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+//        fakeStoreProductDto.setTitle(createProductDto.getTitle());
+//        fakeStoreProductDto.setDescription(createProductDto.getDescription());
+//        fakeStoreProductDto.setPrice(createProductDto.getPrice());
+//        fakeStoreProductDto.setCategory(createProductDto.getCategory());
+//        fakeStoreProductDto.setImage(createProductDto.getImage());
+//
+//        FakeStoreProductDto fakeStoreProductDto1 = restTemplate.postForObject("https://fakestoreapi.com/products", fakeStoreProductDto, FakeStoreProductDto.class);
+//        return fakeStoreProductDto1.toProduct();
+//    }
 }
 

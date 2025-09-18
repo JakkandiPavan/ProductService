@@ -1,15 +1,17 @@
 package org.productoperations.productservice.services;
 
-import org.productoperations.productservice.dtos.CreateProductDto;
+import org.productoperations.productservice.exceptions.ProductNotFoundExceptions;
 import org.productoperations.productservice.models.product;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Productservice {
 
     public List<product> getAllProducts();
 
-    public product getSingleProduct(long id);
+    product getSingleProduct(long id) throws ProductNotFoundExceptions;
 
-    public product createProduct(CreateProductDto createProductDto);
+    public product createProduct(String title, String description, String Category, double price, String image);//this will be wrong if we send whole product object
+
 }

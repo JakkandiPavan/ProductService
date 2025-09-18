@@ -1,8 +1,10 @@
 package org.productoperations.productservice.controllers;
 
 import org.productoperations.productservice.dtos.CreateProductDto;
+import org.productoperations.productservice.exceptions.ProductNotFoundExceptions;
 import org.productoperations.productservice.models.product;
 import org.productoperations.productservice.services.Productservice;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,8 +17,9 @@ public class ProductController {
 
 
     //dependency injection
-    private Productservice productservice;//interface and dependency injection(DI)
-    public ProductController(Productservice productservice) {
+    private Productservice productservice;//object datatype and interface and dependency injection(DI)
+    //in @Qualifier need to inject objects of service class ex: fakeStoreProductService or selfProductService
+    public ProductController(@Qualifier("selfProductService") Productservice productservice) {
         this.productservice = productservice;
     }
 
@@ -39,7 +42,8 @@ public class ProductController {
     * GET /products/{id}
     * */
     @GetMapping("/products/{id}")
-    public product getSingleProduct(@PathVariable("id") long id) {
+    public product getSingleProduct(@PathVariable("id") long id) throws ProductNotFoundExceptions {
+
         return productservice.getSingleProduct(id);
     }
 
@@ -61,9 +65,9 @@ public class ProductController {
     * }
     * */
     //we are changing return type from void to product just for testing
-    @PostMapping("/products")
+    @PostMapping("/products")//products -> endpoint
     public product createProduct(@RequestBody CreateProductDto createProductDto)
     {
-        return productservice.createProduct(createProductDto);
+        return productservice.createProduct(createProductDto.getTitle(), createProductDto.getDescription(), createProductDto.getImage(), createProductDto.getPrice(), createProductDto.getImage());
     }
 }

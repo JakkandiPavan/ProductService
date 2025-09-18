@@ -1,12 +1,32 @@
 package org.productoperations.productservice.models;
 
-public class product {
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+
+@Entity
+public class product extends BaseModel {
     private long id;
     private String title;
     private String description;
     private double price;
+    @ManyToOne(cascade = {CascadeType.PERSIST}) //cardinality
     private Category category;
     private String imageurl;
+    /*
+    * product Category
+    * relation = cardinality
+    *
+    * product  Category
+    * 1        1
+    * Many     1
+    * P : C
+    * M : 1
+    *
+    * are we defining a foreign key constraints?
+    *
+    * in your product table, will you have a category id column?
+    * */
 
     public product(long id, String title, String description, double price, Category category, String imageurl) {
         this.id = id;
